@@ -44,7 +44,7 @@ class DocGiaController extends Controller
                 'ngay_sinh' => 'nullable|date',
                 'dia_chi' => 'nullable|string|max:255',
                 'email' => 'nullable|email|max:255',
-                'ngay_lap_the' => 'nullable|date',
+                'ngay_lap_the' => 'nullable|date_format:Y-m-d H:i:s',
             ]);
 
             // Create a new DocGia instance and save it to the database
@@ -107,16 +107,16 @@ class DocGiaController extends Controller
      * Remove the specified resource from storage.
      *
      * @param int $id
-     * @return Response
+     * @return JsonResponse
      */
-    public function destroy(int $id): Response
+    public function destroy(int $id): JsonResponse
     {
         // Check if the user is authenticated
         if (Auth::check()) {
             $docGia = DocGia::findOrFail($id);
             $docGia->delete();
 
-            return response()->noContent(); // 204 No Content status code
+            return response()->json(['message' => 'Done'], 204); // 204 No Content status code
         } else {
             return response()->json(['message' => 'Unauthorized'], 401);
         }
