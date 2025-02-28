@@ -1,8 +1,8 @@
 <?php
 
+namespace App\Http\Controllers\Api;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -17,3 +17,7 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+Route::get('docGia', [DocGiaController::class, 'index'])->name('docGia.index')->middleware('auth:sanctum');
+Route::post('user/login', [UserController::class, 'login']);
+Route::post('user/register', [UserController::class, 'register']);
