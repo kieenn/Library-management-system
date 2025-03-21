@@ -13,10 +13,7 @@ class MuonSach extends Model
     protected $fillable = [
         'id_doc_gia',
         'ngay_muon',
-        'ma_sach',
-        'ten_sach',
-        'the_loai',
-        'tac_gia',
+        'ma_sach'
     ];
 
     // Relationship with DocGia (Readers)
@@ -31,3 +28,4 @@ class MuonSach extends Model
         return $this->belongsTo(Sach::class, 'ma_sach', 'ID');
     }
 }
+
