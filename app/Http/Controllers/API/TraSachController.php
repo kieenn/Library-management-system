@@ -115,4 +115,28 @@ class TraSachController extends Controller
             return response()->json(['message' => 'Unauthorized'], 401);
         }
     }
+
+    public function search(Request $request): JsonResponse
+    {
+        if (Auth::check()) {
+            $traSach = TraSach::query();
+            if ($request->has('ma_sach')) {
+                $traSach->where('ma_sach', 'like', '%' . $request->input('ma_sach') . '%');
+            }
+            if ($request->has('ngay_tra')) {
+                $traSach->where('ngay_tra', 'like', '%' . $request->input('ngay_tra') . '%');
+            }
+            if ($request->has('ngay_muon')) {
+                $traSach->where('ngay_muon', 'like', '%' . $request->input('ngay_muon') . '%');
+            }
+            if ($request->has('so_ngay_muon')) {
+                $traSach->where('so_ngay_muon', $request->input('so_ngay_muon') . '%');
+            }
+            $traSach = $traSach->get();
+            return response()->json($traSach);
+        }
+        else {
+            return response()->json(['message' => 'Unauthorized'], 401);
+        }
+    }
 }

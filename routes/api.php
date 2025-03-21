@@ -41,6 +41,7 @@ Route::get('borrow', [MuonSachController::class, 'index'])->middleware('auth:san
 Route::post('borrow/store', [MuonSachController::class, 'store'])->middleware('auth:sanctum');
 Route::post('borrow/delete/{id}', [MuonSachController::class, 'destroy'])->middleware('auth:sanctum');
 Route::post('borrow/update/{id}', [MuonSachController::class, 'update'])->middleware('auth:sanctum');
+Route::get('borrow/search', [MuonSachController::class, 'search'])->middleware('auth:sanctum');
 
 
 //return books
@@ -48,3 +49,4 @@ Route::get('return', [TraSachController::class, 'index'])->middleware('auth:sanc
 Route::post('return/store', [TraSachController::class, 'store'])->middleware('auth:sanctum');
 Route::post('return/delete/{id}', [TraSachController::class, 'destroy'])->middleware('auth:sanctum');
 Route::post('return/update/{id}', [TraSachController::class, 'update'])->middleware('auth:sanctum');
+Route::get('return/search', [TraSachController::class, 'search'])->middleware('auth:sanctum');

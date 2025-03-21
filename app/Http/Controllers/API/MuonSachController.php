@@ -107,4 +107,25 @@ class MuonSachController extends Controller
             return response()->json(['message' => 'Unauthorized'], 401);
         }
     }
+
+    public function search(Request $request): JsonResponse
+    {
+        if (Auth::check()) {
+            $query = MuonSach::query();
+
+            if ($request->has('ngay_muon')) {
+                $query->where('ngay_muon', 'like', '%' . $request->input('ngay_muon') . '%');
+            }
+            if ($request->has('ma_sach')) {
+                $query->where('ma_sach', 'like', '%' . $request->input('ma_sach') . '%');
+            }
+            $muonSach = $query->get();
+            return response()->json($muonSach);
+        }
+
+        else{
+            return response()->json(['message' => 'Unauthorized'], 401);
+        }
+
+    }
 }
